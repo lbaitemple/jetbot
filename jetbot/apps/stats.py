@@ -28,11 +28,27 @@ from PIL import ImageFont
 from jetbot.utils.utils import get_ip_address
 
 import subprocess
+import signal
+import time
 
+class GracefulKiller:
+  kill_now = False
+  def __init__(self,display):
+    self.display=display
+    signal.signal(signal.SIGINT, self.exit_gracefully)
+    signal.signal(signal.SIGTERM, self.exit_gracefully)
+
+  def exit_gracefully(self,signum, frame):
+    self.display.clear()
+    self.display.display()
+    self.kill_now = True
+    
 # 128x32 display with hardware I2C:
 disp = Adafruit_SSD1306.SSD1306_128_32(rst=None, i2c_bus=1, gpio=1) # setting gpio to 1 is hack to avoid platform detection
 
-while True:
+killer = GracefulKiller(disp)
+
+while not killer.kill_now:
     
     try:
         # Try to connect to the OLED display module via I2C.
