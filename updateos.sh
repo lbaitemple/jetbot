@@ -92,3 +92,5 @@ sudo addgroup --system ggc_user
 sudo addgroup --system ggc_group
 sudo chown -R ggc_user /home/ggc_user
 sudo chgrp -R ggc_user /home/ggc_user
+
+sudo sh -c 'echo "alias green='sudo chmod 0666 /dev/i2c-1 && sudo /greengrass/ggc/core/greengrassd  '"> ~/.bashrc
