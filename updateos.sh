@@ -23,7 +23,15 @@ git clone https://github.com/pytorch/vision torchvision   # see below for versio
 cd torchvision
 git checkout tags/v0.8.1
 export BUILD_VERSION=0.8.1
-sudo python3 setup.py install --user
+sudo -H python3 setup.py install
+
+
+cd $HOME
+git clone https://github.com/NVIDIA-AI-IOT/torch2trt
+cd torch2trt
+sudo python3 setup.py install
+
+
 
 cd ~
 sudo python3 -m pip install git+https://github.com/ipython/traitlets@4.x
