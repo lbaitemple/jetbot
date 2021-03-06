@@ -39,7 +39,16 @@ sudo pip3 install jupyter jupyterlab
 sudo jupyter labextension install @jupyter-widgets/jupyterlab-manager
 sudo jupyter labextension install @jupyterlab/statusbar
 jupyter lab --generate-config
-jupyter notebook jetbot
+python3 -c "from jupyter_server.auth.security import set_password; set_password('jetbot', '$HOME/.jupyter/jupyter_server_config.json')"
+#sudo chown -R pi:pi /home/pi/.local/share/
+
+# Install bokeh
+#sudo pip3 install bokeh
+#sudo jupyter labextension install @bokeh/jupyter_bokeh
+echo "c.NotebookApp.token = ''" >> $HOME/.jupyter/jupyter_lab_config.py
+echo "c.NotebookApp.password_required = True" >> $HOME/.jupyter/jupyter_lab_config.py
+echo "c.NotebookApp.allow_credentials = False" >> $HOME/.jupyter/jupyter_lab_config.py
+
 
 cd
 sudo apt install python3-smbus
